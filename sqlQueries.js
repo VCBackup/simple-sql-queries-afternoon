@@ -24,7 +24,7 @@ SELECT * FROM Person ORDER BY Height DESC
   * List all the people in the Person table by oldest first
   SELECT * FROM Person ORDER BY Age DESC
 
-  * List all the people in the Person table older than age 25.
+  * List all the people in the Person table older than age 25.sd
   SELECT * FROM Person WHERE Age > 25
 
   * List all the people in the Person table that are exactly 25.
@@ -98,24 +98,44 @@ INSERT INTO Employee(EmployeeId, LastName, FirstName, Title, ReportsTo, BirthDat
 VALUES (10, 'Salsman', 'Zell', 'Sales Manager', null, 1955-10-01, 1999-08-01, '1374 S 1440 E', 'Spanish Fork', 'NH', 'USA', '15434', '45634773', '86579879', 'somespecial@email.com')
 
 * List all Employee first and last names only that live in Calgary
+SELECT LastName, FirstName FROM Employee WHERE City = 'Calgary'
 
 * Find the first and last name for the youngest employee
+SELECT FirstName, LastName FROM Employee ORDER BY BirthDate DESC LIMIT 1
 
 * Find the first and last name for the oldest employee
+SELECT FirstName, LastName FROM Employee ORDER BY BirthDate ASC LIMIT 1
 
 * Find everyone that reports to Nancy Edwards (Use the ReportsTo column)
+SELECT * FROM Employee WHERE ReportsTo = 2
 
 * Count how many people live in Lethbridge
-
+SELECT COUNT(*) FROM Employee WHERE City = 'Lethbridge'
 
 ## Invoice 
 9. Use the Invoice table for the following
 
 * Count how many orders were made from the USA
+SELECT COUNT(*) FROM Invoice WHERE BillingCountry = 'USA'
+
 * Find the largest order total amount
+SELECT * FROM Invoice ORDER BY Total DESC LIMIT 1
+SELECT MAX(Total) FROM Invoice
+
 * Find the smallest order total amount
+SELECT MIN(Total) FROM Invoice
+
 * Find all orders bigger than $5
+SELECT * FROM Invoice WHERE Total > 5.00 ORDER BY Total DESC
+
 * Count how many orders were smaller than $5
+SELECT COUNT(Total) FROM Invoice WHERE Total < 5.00
+
 * Count how many orders were in CA, TX, or AZ (use IN)
+SELECT COUNT(*) FROM Invoice WHERE BillingState IN ('CA', 'TX', 'AZ')
+
 * Get the average total of the orders
-* Get the total sum of the orders*/
+SELECT AVG(Total) FROM Invoice
+
+* Get the total sum of the orders
+SELECT SUM(Total) FROM Invoice*/
